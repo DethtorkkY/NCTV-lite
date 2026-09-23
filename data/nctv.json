@@ -1,0 +1,14 @@
+{
+  "users": [{ "id": "admin-1", "name": "Администратор NCTV", "email": "admin@nctv.kz", "passwordHash": "$2a$12$EEYuehOZh91bbvvb5tu05.JwTG2hXrIeA3a9xc/PXgY97lRscuy3G", "role": "ADMIN" }],
+  "events": [
+    { "id": "chess-cup-2026", "name": "NIS Chess Cup 2026", "location": "Астана", "startsAt": "2026-10-12", "endsAt": "2026-10-13", "status": "UPCOMING", "prize": "Кубок NCTV", "description": "Первый школьный шахматный турнир NIS. Регистрация участников скоро откроется.", "createdAt": "2026-09-04T10:00:00.000Z" }
+  ],
+  "teams": [
+    { "id": "astana", "name": "NIS Astana", "city": "Астана", "points": 892, "color": "#e31c23" },
+    { "id": "almaty", "name": "NIS Almaty", "city": "Алматы", "points": 861, "color": "#2f6feb" },
+    { "id": "shymkent", "name": "NIS Shymkent", "city": "Шымкент", "points": 804, "color": "#27a35a" },
+    { "id": "semey", "name": "NIS Semey", "city": "Семей", "points": 751, "color": "#c9a227" },
+    { "id": "aktau", "name": "NIS Aktau", "city": "Актау", "points": 718, "color": "#7a5cff" }
+  ],
+  "matches": []
+}
