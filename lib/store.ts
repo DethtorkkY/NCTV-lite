@@ -1,5 +1,5 @@
 import { neon } from "@neondatabase/serverless";
-import type { Database, Event, Match } from "./types";
+import type { Database, Event, Match, Team } from "./types";
 
 const sql = neon(process.env.nctv_POSTGRES_URL || process.env.POSTGRES_URL || "postgresql://nctv:nctv@localhost:5432/nctv");
 
@@ -32,3 +32,6 @@ export async function addMatch(input: Omit<Match, "id">) { await ensureDatabase(
 export async function updateMatch(id: string, patch: Pick<Match, "scoreA" | "scoreB" | "status">) { await ensureDatabase(); const rows = await sql`UPDATE matches SET score_a = ${patch.scoreA}, score_b = ${patch.scoreB}, status = ${patch.status} WHERE id = ${id} RETURNING id, event_id, team_a, team_b, score_a, score_b, starts_at, status, best_of`; const row = rows[0]; return row ? { id: String(row.id), eventId: String(row.event_id), teamA: String(row.team_a), teamB: String(row.team_b), scoreA: Number(row.score_a), scoreB: Number(row.score_b), startsAt: String(row.starts_at), status: row.status as Match["status"], bestOf: Number(row.best_of) } : null; }
 export async function deleteMatch(id: string) { await ensureDatabase(); return (await sql`DELETE FROM matches WHERE id = ${id} RETURNING id`).length > 0; }
 export async function deleteEvent(id: string) { await ensureDatabase(); return (await sql`DELETE FROM events WHERE id = ${id} RETURNING id`).length > 0; }
+export async function addTeam(input: Omit<Team, "id">) { await ensureDatabase(); const team: Team = { ...input, id: crypto.randomUUID() }; await sql`INSERT INTO teams (id, name, city, points, color) VALUES (${team.id}, ${team.name}, ${team.city}, ${team.points}, ${team.color})`; return team; }
+export async function updateTeam(id: string, patch: Omit<Team, "id">) { await ensureDatabase(); const rows = await sql`UPDATE teams SET name = ${patch.name}, city = ${patch.city}, points = ${patch.points}, color = ${patch.color} WHERE id = ${id} RETURNING id, name, city, points, color`; const row = rows[0]; return row ? { id: String(row.id), name: String(row.name), city: String(row.city), points: Number(row.points), color: String(row.color) } : null; }
+export async function deleteTeam(id: string) { await ensureDatabase(); const [{ count }] = await sql`SELECT COUNT(*)::int AS count FROM matches WHERE team_a = ${id} OR team_b = ${id}`; if (Number(count) > 0) return "HAS_MATCHES"; return (await sql`DELETE FROM teams WHERE id = ${id} RETURNING id`).length > 0 ? "DELETED" : "NOT_FOUND"; }

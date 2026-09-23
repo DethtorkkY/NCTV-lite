@@ -1,0 +1,9 @@
+import { NextResponse } from "next/server";
+import { addTeam, db, deleteTeam, updateTeam } from "@/lib/store";
+import { getSession } from "@/lib/auth";
+
+function isAdmin(session: Awaited<ReturnType<typeof getSession>>) { return session?.role === "ADMIN"; }
+export async function GET() { return NextResponse.json((await db()).teams); }
+export async function POST(request: Request) { const session = await getSession(); if (!isAdmin(session)) return NextResponse.json({ error: "Требуются права администратора" }, { status: 403 }); const body = await request.json(); if (!body.name?.trim()) return NextResponse.json({ error: "Укажите название команды" }, { status: 400 }); return NextResponse.json(await addTeam({ name: body.name.trim(), city: body.city?.trim() || "—", points: Math.max(0, Number(body.points) || 0), color: /^#[0-9a-f]{6}$/i.test(body.color) ? body.color : "#7a5cff" }), { status: 201 }); }
+export async function PATCH(request: Request) { const session = await getSession(); if (!isAdmin(session)) return NextResponse.json({ error: "Требуются права администратора" }, { status: 403 }); const body = await request.json(); const team = await updateTeam(body.id, { name: String(body.name || "").trim(), city: String(body.city || "—").trim(), points: Math.max(0, Number(body.points) || 0), color: /^#[0-9a-f]{6}$/i.test(body.color) ? body.color : "#7a5cff" }); return team ? NextResponse.json(team) : NextResponse.json({ error: "Команда не найдена" }, { status: 404 }); }
+export async function DELETE(request: Request) { const session = await getSession(); if (!isAdmin(session)) return NextResponse.json({ error: "Требуются права администратора" }, { status: 403 }); const result = await deleteTeam((await request.json()).id); if (result === "DELETED") return NextResponse.json({ ok: true }); return NextResponse.json({ error: result === "HAS_MATCHES" ? "Нельзя удалить команду, пока она участвует в матчах" : "Команда не найдена" }, { status: 400 }); }
