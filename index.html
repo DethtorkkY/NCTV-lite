@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NCTV — News</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="index.html"><span>N</span>CTV</a>
+      <nav>
+        <a class="active" href="index.html">News</a>
+        <a href="match.html">Matches</a>
+        <a href="rankings.html">Ranking</a>
+        <a href="rankings.html">Teams</a>
+        <a href="rankings.html">Players</a>
+        <a href="index.html">Events</a>
+      </nav>
+      <input class="search" placeholder="Search" />
+    </div>
+  </header>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span><span class="pill">LIVE</span>NIS Astana 12–9 NIS Almaty · Inferno</span>
+      <span><span class="pill soon">BO3</span>NIS Shymkent vs NIS Semey · 19:00</span>
+      <span><span class="pill soon">CUP</span>Autumn School Cup — 12 сентября</span>
+    </div>
+  </div>
+
+  <p class="note">Прототип основы · HLTV-layout для NIS · не финальный код сайта</p>
+
+  <main class="wrap">
+    <section>
+      <article class="card hero">
+        <div class="hero-body">
+          <div class="tag">Interschool Finals</div>
+          <h1>NIS Astana берут кубок: 2–1 против NIS Almaty</h1>
+          <p>Решающая Ancient закончилась 16–14. MVP серии — frost (rating 1.38).</p>
+        </div>
+      </article>
+      <div class="card news-list">
+        <h2>Latest news</h2>
+        <a class="news-item" href="match.html">
+          <div class="thumb a"></div>
+          <div>
+            <h3>Veto на финале: Almaty отдают Inferno, Astana пикают Ancient</h3>
+            <div class="meta">Match report · 2 часа назад</div>
+          </div>
+        </a>
+        <a class="news-item" href="rankings.html">
+          <div class="thumb b"></div>
+          <div>
+            <h3>Новый NIS Ranking: Shymkent поднимаются на 3 место</h3>
+            <div class="meta">Ranking · 5 часов назад</div>
+          </div>
+        </a>
+        <a class="news-item" href="match.html">
+          <div class="thumb c"></div>
+          <div>
+            <h3>Состав NIS Kokshetau на Autumn Cup: два дебютанта из 10 класса</h3>
+            <div class="meta">Teams · вчера</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <aside>
+      <div class="card">
+        <h2>NIS Ranking</h2>
+        <a class="rank-row" href="rankings.html"><span class="pos">1</span><span class="team-dot" style="background:#e31c23"></span>NIS Astana<span class="pts">892</span></a>
+        <a class="rank-row" href="rankings.html"><span class="pos">2</span><span class="team-dot" style="background:#2f6feb"></span>NIS Almaty<span class="pts">861</span></a>
+        <a class="rank-row" href="rankings.html"><span class="pos">3</span><span class="team-dot" style="background:#27a35a"></span>NIS Shymkent<span class="pts">804</span></a>
+        <a class="rank-row" href="rankings.html"><span class="pos">4</span><span class="team-dot" style="background:#c9a227"></span>NIS Semey<span class="pts">751</span></a>
+        <a class="rank-row" href="rankings.html"><span class="pos">5</span><span class="team-dot" style="background:#7a5cff"></span>NIS Aktau<span class="pts">718</span></a>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h2>Results</h2>
+        <a class="result-row" href="match.html">Astana <span class="score"><span class="w">2</span> – <span class="l">1</span></span> Almaty</a>
+        <a class="result-row" href="match.html">Shymkent <span class="score"><span class="w">2</span> – <span class="l">0</span></span> Semey</a>
+        <a class="result-row" href="match.html">Kokshetau <span class="score"><span class="w">1</span> – <span class="l">2</span></span> Aktau</a>
+      </div>
+    </aside>
+  </main>
+
+  <footer>NCTV · NIS Counter-Strike coverage · прототип 2026</footer>
+</body>
+</html>

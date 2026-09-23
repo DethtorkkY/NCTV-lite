@@ -1,0 +1,3 @@
+import Header from "@/components/Header";
+import { db } from "@/lib/store";
+export default async function Ranking() { const teams = (await db()).teams.sort((a,b)=>b.points-a.points); return <><Header/><main className="page"><div className="page-head"><h1>NIS Ranking</h1><p>Рейтинг школ будет обновляться по результатам соревнований.</p></div><div className="table-wrap"><table><thead><tr><th>#</th><th>Команда</th><th>Город</th><th>Очки</th></tr></thead><tbody>{teams.map((team,i)=><tr key={team.id}><td>{i+1}</td><td><span className="team-dot inline" style={{background:team.color}}/> {team.name}</td><td>{team.city}</td><td className="points">{team.points}</td></tr>)}</tbody></table></div></main><footer>NCTV · 2026</footer></>; }
